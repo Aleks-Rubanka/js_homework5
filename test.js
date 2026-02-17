@@ -1,49 +1,63 @@
+// 🔹 Створюємо сервіс
+var service = {
+  services: {
+    "стрижка": "60 грн",
+    "гоління": "80 грн",
+    "Миття голови": "100 грн"
+  }
+};
 
-//Метод price() — загальна вартість
-services.price = function () {
+// 🔹 Додаємо нову послугу
+service.services["Розбити скло"] = "200 грн";
+
+
+// 🔹 Метод загальної вартості
+service.price = function () {
   var total = 0;
 
-  for (var key in this) {
-    if (typeof this[key] === "string") {
-      var number = parseInt(this[key]);
-      total += number;
-    }
+  for (var key in this.services) {
+    var number = parseInt(this.services[key]);
+    total += number;
   }
 
   return total + " грн";
 };
 
 
-//Метод minPrice() — мінімальна ціна
-services.minPrice = function () {
+// 🔹 Метод мінімальної ціни
+service.minPrice = function () {
   var min = Infinity;
 
-  for (var key in this) {
-    if (typeof this[key] === "string") {
-      var number = parseInt(this[key]);
+  for (var key in this.services) {
+    var number = parseInt(this.services[key]);
 
-      if (number < min) {
-        min = number;
-      }
+    if (number < min) {
+      min = number;
     }
   }
 
   return min + " грн";
 };
 
-//Метод maxPrice() — максимальна ціна
-services.maxPrice = function () {
+
+// 🔹 Метод максимальної ціни
+service.maxPrice = function () {
   var max = 0;
 
-  for (var key in this) {
-    if (typeof this[key] === "string") {
-      var number = parseInt(this[key]);
+  for (var key in this.services) {
+    var number = parseInt(this.services[key]);
 
-      if (number > max) {
-        max = number;
-      }
+    if (number > max) {
+      max = number;
     }
   }
 
   return max + " грн";
 };
+
+
+// 🔹 Валідація (перевірка роботи)
+console.log("Послуги:", service.services);
+console.log("Загальна сума:", service.price());
+console.log("Мінімальна ціна:", service.minPrice());
+console.log("Максимальна ціна:", service.maxPrice());
